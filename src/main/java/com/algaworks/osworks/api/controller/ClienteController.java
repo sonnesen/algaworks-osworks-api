@@ -40,13 +40,13 @@ public class ClienteController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Cliente> getCliente(@PathVariable Long id) {
+	public ResponseEntity<Cliente> buscar(@PathVariable Long id) {
 		var optional = clienteRepository.findById(id);
 
-		if (optional.isEmpty())
-			return ResponseEntity.notFound().build();
+		if (optional.isPresent())
+			return ResponseEntity.ok().body(optional.get());
 
-		return ResponseEntity.ok().body(optional.get());
+		return ResponseEntity.notFound().build();
 	}
 
 	@PostMapping
@@ -63,8 +63,9 @@ public class ClienteController {
 		}
 
 		cliente.setId(id);
+		cliente = cadastroClienteService.salvar(cliente);
 
-		return ResponseEntity.ok(cadastroClienteService.salvar(cliente));
+		return ResponseEntity.ok(cliente);
 	}
 
 	@DeleteMapping("/{id}")

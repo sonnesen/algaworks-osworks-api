@@ -1,6 +1,6 @@
 package com.algaworks.osworks.api.exceptionhandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +21,10 @@ public class Problema {
 
 	@NonNull
 	private Integer status;
+	
 	@NonNull
-	private LocalDateTime dataHora;
+	private OffsetDateTime dataHora;
+	
 	@NonNull
 	private String titulo;
 
