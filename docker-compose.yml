@@ -1,0 +1,31 @@
+version: "3.8"
+
+# para rodar os services abaixo
+# docker-compose up -d
+
+# para terminar os services abaixo
+# docker-compose down
+
+services:
+    mysql:
+        image: "mysql"
+        environment:
+          MYSQL_ROOT_PASSWORD: "root"
+          MYSQL_DATABASE: "osworks"
+        ports:
+          - "3306:3306"
+        volumes:
+          - ${PWD}/mysqldb:/var/lib/mysql
+        networks:
+          - mysql-network
+
+    adminer:
+        image: "adminer"
+        ports:
+          - "8180:8080"
+        networks:
+          - mysql-network
+
+networks:
+  mysql-network:
+    driver: bridge
